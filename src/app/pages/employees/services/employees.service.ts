@@ -12,22 +12,14 @@ export class CRUDEmployeeService {
   private baseUrl: string = environment.baseUrl;
 
   private employeesApi: string = this.baseUrl + "api/v1/employees";
-  private employeeApi: string = this.baseUrl + "api/v1/employee/";
 
-  private addEmployeApi: string = this.baseUrl + "api/v1/employees";
-  private updateEmployeeApi: string = this.baseUrl + "api/v1/update/";
-  private deleteEmployeeApi: string = this.baseUrl + "api/v1/employees/";
+  private addEmployeApi: string = this.baseUrl + "api/v1/create";
+  private updateAndDeleteEmployeeApi: string = this.baseUrl + "api/v1/update/";
 
   constructor(private http: Http) {}
 
   getAllEmployees(): Observable<employee[]> {
     return this.http.get(this.employeesApi).pipe(map(res => res.json()));
-  }
-
-  getOneEmployee(employeeId: number): Observable<employee> {
-    return this.http
-      .get(this.employeesApi + employeeId)
-      .pipe(map(res => res.json()));
   }
 
   addEmployee(employee: employee) {
@@ -38,13 +30,13 @@ export class CRUDEmployeeService {
 
   updateEmployee(employee: employee) {
     return this.http
-      .put(this.updateEmployeeApi + employee.id, employee)
+      .put(this.updateAndDeleteEmployeeApi + employee.id, employee)
       .pipe(map(res => res.json()));
   }
 
   deleteEmployee(employeeId: number) {
     return this.http
-      .delete(this.deleteEmployeeApi + employeeId)
+      .delete(this.updateAndDeleteEmployeeApi + employeeId)
       .pipe(map(res => res.json()));
   }
 }
