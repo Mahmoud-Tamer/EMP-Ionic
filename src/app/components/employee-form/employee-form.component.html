@@ -1,0 +1,49 @@
+<form [formGroup]="employeeForm" text-center>
+  <ion-card style="margin: 0px">
+    <ion-card-header>
+      <ion-row>
+        <ion-col size="12">
+          <div>
+            <ion-avatar
+              style="margin: auto; height: 100px; width: 100px;"
+              (click)="selectImage()"
+            >
+              <img
+                [src]="employee?.profile_image"
+                onError="this.src='../../../assets/imgs/no_profile_image.png';"
+              />
+            </ion-avatar>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-item>
+        <ion-label position="floating">Employee Name</ion-label>
+        <ion-input formControlName="employee_name"></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col size="8">
+          <ion-item>
+            <ion-label position="floating">Salary</ion-label>
+            <ion-input
+              type="number"
+              formControlName="employee_salary"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4">
+          <ion-item>
+            <ion-label position="floating">Age</ion-label>
+            <ion-input type="number" formControlName="employee_age"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-button
+      color="success"
+      (click)="saveForm()"
+      [disabled]="employeeForm.invalid"
+    >
+      Save
+    </ion-button>
+  </ion-card>
+</form>

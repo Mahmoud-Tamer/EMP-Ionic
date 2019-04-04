@@ -8,13 +8,14 @@ import { Observable } from "rxjs";
 @Injectable({
   providedIn: "root"
 })
-export class CRUDEmployeeService {
+export class EmployeesService {
   private baseUrl: string = environment.baseUrl;
 
   private employeesApi: string = this.baseUrl + "api/v1/employees";
 
   private addEmployeApi: string = this.baseUrl + "api/v1/create";
-  private updateAndDeleteEmployeeApi: string = this.baseUrl + "api/v1/update/";
+  private updateEmployeeApi: string = this.baseUrl + "api/v1/update/";
+  private deleteEmployeeApi: string = this.baseUrl + "api/v1/delete/";
 
   constructor(private http: Http) {}
 
@@ -25,18 +26,18 @@ export class CRUDEmployeeService {
   addEmployee(employee: employee) {
     return this.http
       .post(this.addEmployeApi, employee)
-      .pipe(map(res => res.json()));
+      .pipe(map(res => res.text()));
   }
 
-  updateEmployee(employee: employee) {
+  updateEmployee(employee: employee, oldEmployeeId: number) {
     return this.http
-      .put(this.updateAndDeleteEmployeeApi + employee.id, employee)
-      .pipe(map(res => res.json()));
+      .put(this.updateEmployeeApi + oldEmployeeId, employee)
+      .pipe(map(res => res.text()));
   }
 
   deleteEmployee(employeeId: number) {
     return this.http
-      .delete(this.updateAndDeleteEmployeeApi + employeeId)
-      .pipe(map(res => res.json()));
+      .delete(this.deleteEmployeeApi + employeeId)
+      .pipe(map(res => res.text()));
   }
 }

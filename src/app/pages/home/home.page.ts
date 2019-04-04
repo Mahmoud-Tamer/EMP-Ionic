@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { PopoverController } from "@ionic/angular";
 
 @Component({
   selector: "app-home",
@@ -15,14 +14,5 @@ export class HomePage {
     }
   };
 
-  constructor(private popoverCtrl: PopoverController) {}
-
-  async addFinePopover() {
-    const popover = await this.popoverCtrl.create({
-      component: "",
-      translucent: true,
-      animated: false
-    });
-    return await popover.present();
-  }
+  constructor() {}
 }
