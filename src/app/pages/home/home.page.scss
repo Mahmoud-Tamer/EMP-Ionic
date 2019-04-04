@@ -1,0 +1,35 @@
+ion-header {
+  background: #ecf0f1;
+}
+
+.header-md:after {
+  display: none;
+}
+
+ion-toolbar {
+  height: 150px;
+}
+
+.welcome-card {
+  height: 90%;
+  background-image: url("../../../assets/imgs/home-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: initial;
+}
+
+.content-slider {
+  background: rgba(0, 0, 0, 0.2);
+  height: 30%;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  position: absolute;
+  width: 80%;
+  border-radius: 10px;
+}
+
+.content-slider-text {
+  color: #fff;
+  font-size: 700;
+}

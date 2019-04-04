@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <div style="margin-top: 50px; display: flex;">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Home
+      </ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card text-center class="welcome-card">
+    <ion-slides class="content-slider" [options]="contentSliderOptions">
+      <ion-slide>
+        <div>
+          <h4 class="content-slider-text">Welcome To EMP App</h4>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div>
+          <h4 class="content-slider-text">Join Us</h4>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div>
+          <h4 class="content-slider-text">Our Members Are Like Family</h4>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
+</ion-content>

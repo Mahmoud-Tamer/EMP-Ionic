@@ -1,0 +1,30 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-content class="menu-content">
+        <div style="margin-top: 20px" text-center>
+          <img src="../assets/imgs/employee.png" height="100px" width="100px" />
+        </div>
+        <ion-list class="menu-list" lines="none">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item
+              class="menu-item"
+              [routerDirection]="'root'"
+              [routerLink]="[p.url]"
+            >
+              <ion-icon
+                class="menu-item-icon"
+                slot="start"
+                [name]="p.icon"
+              ></ion-icon>
+              <ion-label>
+                {{ p.title }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

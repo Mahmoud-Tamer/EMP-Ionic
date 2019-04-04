@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>employees</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab vertical="top" horizontal="end" edge="true" slot="fixed">
+    <ion-fab-button color="medium">
+      <ion-icon name="person-add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list class="employees-list" lines="none">
+    <ion-card>
+      <ion-item-sliding>
+        <ion-item>
+          <ion-label>Item</ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="primary"
+            ><ion-icon name="create"></ion-icon>
+            <p>Edit</p></ion-item-option
+          >
+          <ion-item-option color="danger"
+            ><ion-icon name="trash"></ion-icon>
+            <p>Delete</p></ion-item-option
+          >
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-card>
+    <ion-card>
+      <ion-item-sliding>
+        <ion-item>
+          <ion-label>Item</ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="primary"
+            ><ion-icon name="create"></ion-icon>
+            <p>Edit</p></ion-item-option
+          >
+          <ion-item-option color="danger"
+            ><ion-icon name="trash"></ion-icon>
+            <p>Delete</p></ion-item-option
+          >
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-card>
+  </ion-list>
+</ion-content>
