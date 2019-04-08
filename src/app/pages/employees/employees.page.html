@@ -16,7 +16,17 @@
       <ion-icon name="person-add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <div text-center *ngIf="employees.length == 0">
+  <ion-refresher
+    slot="fixed"
+    [disabled]="!(employeesArray.length > 0) && !noEmployees"
+    (ionRefresh)="getAllEmployees($event)"
+  >
+    <ion-refresher-content
+      refreshingSpinner="lines-small"
+      pullingIcon="arrow-dropdown"
+    ></ion-refresher-content>
+  </ion-refresher>
+  <div text-center *ngIf="loading && !noEmployees">
     <ion-spinner name="lines-small"></ion-spinner>
   </div>
   <div *ngIf="noEmployees">
@@ -28,10 +38,33 @@
     </ion-card>
   </div>
   <ion-list class="employees-list" lines="none">
-    <ion-card *ngFor="let employee of employees; let id = index">
+    <ion-card *ngFor="let employee of employeesArray; let id = index">
       <ion-item-sliding>
-        <ion-item>
-          <ion-label>{{ employee.employee_name }}</ion-label>
+        <ion-item style="font-size: 12pt; height: 80px;">
+          <ion-avatar slot="start" style="width: 50px; height: 50px">
+            <img
+              defaultImage="../../../assets/imgs/no_profile_image.png"
+              [lazyLoad]="employee?.profile_image"
+            />
+          </ion-avatar>
+          <ion-grid style="width: 100%" no-padding>
+            <ion-row>
+              <ion-col no-padding size="8">
+                <ion-label class="employee-name">{{
+                  employee.employee_name
+                }}</ion-label>
+                <p class="employee-age">{{ employee.employee_age }} years</p>
+              </ion-col>
+
+              <ion-col no-padding size="4">
+                <div text-center>
+                  <ion-label class="employee-salary">{{
+                    employee.employee_salary | currency
+                  }}</ion-label>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </ion-item>
         <ion-item-options side="end">
           <ion-item-option

@@ -1,15 +1,20 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
-import { environment } from "src/environments/environment";
-import { map } from "rxjs/operators";
-import { employee } from "../interface/employee";
-import { Observable } from "rxjs";
+import { map, tap } from "rxjs/operators";
+import { employee } from "../interfaces/employee";
+import { Observable, from } from "rxjs";
+import { employeeData } from "../interfaces/employeeData";
+import {
+  NetworkService,
+  ConnectionStatus
+} from "src/app/services/network.service";
+import { Storage } from "@ionic/storage";
 
 @Injectable({
   providedIn: "root"
 })
 export class EmployeesService {
-  private baseUrl: string = environment.baseUrl;
+  private baseUrl: string = "http://dummy.restapiexample.com/";
 
   private employeesApi: string = this.baseUrl + "api/v1/employees";
 
@@ -17,19 +22,49 @@ export class EmployeesService {
   private updateEmployeeApi: string = this.baseUrl + "api/v1/update/";
   private deleteEmployeeApi: string = this.baseUrl + "api/v1/delete/";
 
-  constructor(private http: Http) {}
+  constructor(
+    private http: Http,
+    private networkService: NetworkService,
+    private storage: Storage
+  ) {}
 
   getAllEmployees(): Observable<employee[]> {
-    return this.http.get(this.employeesApi).pipe(map(res => res.json()));
+    if (
+      this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline
+    ) {
+      return from(this.getLocalData("employees"));
+    } else {
+      return this.http.get(this.employeesApi).pipe(
+        map(res => res.json()),
+        tap(res => {
+          let employees = res.slice();
+          this.setLocalData(
+            "employees",
+            employees
+              .reverse()
+              .slice(0, 10)
+              .reverse()
+          );
+        })
+      );
+    }
   }
 
-  addEmployee(employee: employee) {
+  private setLocalData(key, data) {
+    this.storage.set(key, data);
+  }
+
+  private getLocalData(key) {
+    return this.storage.get(key);
+  }
+
+  addEmployee(employee: employeeData) {
     return this.http
       .post(this.addEmployeApi, employee)
       .pipe(map(res => res.text()));
   }
 
-  updateEmployee(employee: employee, oldEmployeeId: number) {
+  updateEmployee(employee: employeeData, oldEmployeeId: number) {
     return this.http
       .put(this.updateEmployeeApi + oldEmployeeId, employee)
       .pipe(map(res => res.text()));

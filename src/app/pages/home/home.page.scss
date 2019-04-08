@@ -6,8 +6,12 @@ ion-header {
   display: none;
 }
 
-ion-toolbar {
-  height: 150px;
+ion-title {
+  position: inherit;
+}
+
+ion-menu-button {
+  color: #fff;
 }
 
 .welcome-card {

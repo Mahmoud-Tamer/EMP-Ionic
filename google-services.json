@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "460738728629",
+    "firebase_url": "https://emp-app-30dda.firebaseio.com",
+    "project_id": "emp-app-30dda",
+    "storage_bucket": "emp-app-30dda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460738728629:android:b0b6755fe9e0f48f",
+        "android_client_info": {
+          "package_name": "emp.testapp.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaYZkXjjJVatnpAgaQDkZZkdxGoGOkhNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460738728629-6t6hgug4lfrkeo588sjf5a038st6uo23.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,26 @@
+.refresher {
+  background: #ecf0f1;
+}
+
 .employees-list {
   background: #ecf0f1;
   padding: 0px;
-  margin-top: 30px;
+  margin-top: 10px;
+}
+
+.employee-name {
+  padding-top: 30px;
+  font-weight: 600;
+  width: 100%;
+}
+
+.employee-age {
+  font-size: 8pt;
+  margin: 0px;
+}
+
+.employee-salary {
+  color: #15cd72;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

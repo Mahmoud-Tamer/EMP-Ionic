@@ -4,10 +4,7 @@
       <ion-row>
         <ion-col size="12">
           <div>
-            <ion-avatar
-              style="margin: auto; height: 100px; width: 100px;"
-              (click)="selectImage()"
-            >
+            <ion-avatar style="margin: auto; height: 100px; width: 100px;">
               <img
                 [src]="employee?.profile_image"
                 onError="this.src='../../../assets/imgs/no_profile_image.png';"
@@ -21,7 +18,7 @@
         <ion-input formControlName="employee_name"></ion-input>
       </ion-item>
       <ion-row>
-        <ion-col size="8">
+        <ion-col size="7">
           <ion-item>
             <ion-label position="floating">Salary</ion-label>
             <ion-input
@@ -30,7 +27,7 @@
             ></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col size="4">
+        <ion-col size="5">
           <ion-item>
             <ion-label position="floating">Age</ion-label>
             <ion-input type="number" formControlName="employee_age"></ion-input>

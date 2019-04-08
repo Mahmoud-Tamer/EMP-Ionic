@@ -7,6 +7,10 @@ import { IonicModule } from "@ionic/angular";
 
 import { EmployeesPage } from "./employees.page";
 import { SharedComponentsModule } from "src/app/components/shared-components.module";
+import {
+  LazyLoadImageModule,
+  intersectionObserverPreset
+} from "ng-lazyload-image";
 
 const routes: Routes = [
   {
@@ -21,6 +25,9 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     SharedComponentsModule,
+    LazyLoadImageModule.forRoot({
+      preset: intersectionObserverPreset
+    }),
     RouterModule.forChild(routes)
   ],
   declarations: [EmployeesPage]

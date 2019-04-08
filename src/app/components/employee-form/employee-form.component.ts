@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { NavParams } from "@ionic/angular";
-import { employee } from "src/app/pages/employees/interface/employee";
+import { NavParams, PopoverController } from "@ionic/angular";
+import { employee } from "src/app/pages/employees/interfaces/employee";
 import { EMPService } from "src/app/services/EMP.service";
 import { EmployeesService } from "src/app/pages/employees/services/employees.service";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { employeeData } from "src/app/pages/employees/interfaces/employeeData";
+import { EventEmitter } from "events";
 
 @Component({
   selector: "app-employee-form",
@@ -20,7 +21,7 @@ export class EmployeeFormComponent implements OnInit {
     private empService: EMPService,
     private employeesService: EmployeesService,
     private formBuilder: FormBuilder,
-    private camera: Camera
+    private popoverController: PopoverController
   ) {
     this.initEmployeeForm();
   }
@@ -43,25 +44,6 @@ export class EmployeeFormComponent implements OnInit {
     }
   }
 
-  selectImage() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    };
-
-    this.camera.getPicture(options).then(
-      imageData => {
-        this.employeeForm.value.profile_image =
-          "data:image/jpeg;base64," + imageData;
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
-
   initEmployeeForm() {
     this.employeeForm = this.formBuilder.group({
       employee_name: ["", Validators.required],
@@ -78,29 +60,42 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   saveForm() {
+    const employeeData: employeeData = {
+      name: this.employeeForm.value.employee_name,
+      salary: this.employeeForm.value.employee_salary,
+      age: this.employeeForm.value.employee_age
+    };
     if (this.employee) {
-      this.updateEmployee();
+      this.updateEmployee(employeeData);
     } else {
-      this.addEmployee();
+      this.addEmployee(employeeData);
     }
   }
 
-  addEmployee() {
+  addEmployee(employee: employeeData) {
     this.empService.presentLoading();
-    this.employeesService.addEmployee(this.employeeForm.value).subscribe(() => {
-      this.empService.hideLoader();
-      this.empService.presentToast("Added");
-    });
+    this.employeesService.addEmployee(employee).subscribe(
+      () => {
+        this.empService.hideLoader();
+        this.empService.presentToast("Added");
+        this.employeeForm.reset();
+      },
+      err => {
+        this.empService.hideLoader();
+        console.error(err);
+
+        this.empService.presentToast("A problem happened");
+      }
+    );
   }
 
-  updateEmployee() {
-    console.log(this.employeeForm.value);
-
+  updateEmployee(newEmployee: employeeData) {
     this.empService.presentLoading();
     this.employeesService
-      .updateEmployee(this.employeeForm.value, this.employee.id)
+      .updateEmployee(newEmployee, this.employee.id)
       .subscribe(
         () => {
+          this.closePopover();
           this.empService.hideLoader();
           this.empService.presentToast("Updated");
         },
@@ -111,5 +106,9 @@ export class EmployeeFormComponent implements OnInit {
           this.empService.presentToast("A problem happened");
         }
       );
+  }
+
+  closePopover() {
+    this.popoverController.dismiss();
   }
 }

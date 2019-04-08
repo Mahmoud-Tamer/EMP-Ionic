@@ -10,14 +10,26 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { HttpModule } from "@angular/http";
 
+import { IonicStorageModule } from "@ionic/storage";
+import { FCM } from "@ionic-native/fcm/ngx";
+import { Network } from "@ionic-native/network/ngx";
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), HttpModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    HttpModule,
+    AppRoutingModule,
+    IonicStorageModule.forRoot()
+  ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    FCM,
+    Network
   ],
   bootstrap: [AppComponent]
 })
