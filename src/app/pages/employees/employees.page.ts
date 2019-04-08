@@ -4,10 +4,7 @@ import { EmployeeFormComponent } from "src/app/components/employee-form/employee
 import { EmployeesService } from "./services/employees.service";
 import { employee } from "./interfaces/employee";
 import { EMPService } from "src/app/services/EMP.service";
-import {
-  NetworkService,
-  ConnectionStatus
-} from "src/app/services/network.service";
+import { NetworkService } from "src/app/services/network.service";
 
 @Component({
   selector: "app-employees",
